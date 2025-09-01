@@ -235,7 +235,16 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, isOpen, onClose })
                 <p className="text-white/90 text-sm mb-4">
                   Let's discuss your project requirements and create something amazing together.
                 </p>
-                <button className="w-full px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-colors duration-300">
+                <button 
+                  className="w-full px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-colors duration-300"
+                  onClick={() => {
+                    onClose();
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                >
                   Start Your Project
                   <ArrowRight className="w-4 h-4 ml-2 inline" />
                 </button>

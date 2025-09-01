@@ -84,11 +84,27 @@ const HeroSection = () => {
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 transition-all duration-1000 delay-600 ${
             isVisible ? 'animate-slide-up opacity-100' : 'opacity-0'
           }`}>
-            <button className="btn-primary text-lg px-8 py-4">
+            <button 
+              className="btn-primary text-lg px-8 py-4"
+              onClick={() => {
+                const portfolioSection = document.getElementById('portfolio');
+                if (portfolioSection) {
+                  portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               View Our Work
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="btn-ghost text-lg px-8 py-4">
+            <button 
+              className="btn-ghost text-lg px-8 py-4"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Get in Touch
             </button>
           </div>

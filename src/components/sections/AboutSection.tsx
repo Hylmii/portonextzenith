@@ -206,7 +206,15 @@ const AboutSection = () => {
                 <span className="text-sm text-gray-400">Fast response</span>
               </div>
             </div>
-            <button className="btn-primary">
+            <button 
+              className="btn-primary"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Get Started Today
               <Zap className="w-4 h-4" />
             </button>

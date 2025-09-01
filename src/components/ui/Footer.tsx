@@ -170,7 +170,18 @@ const Footer = () => {
                     placeholder="Your email"
                     className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   />
-                  <button className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center">
+                  <button 
+                    className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center"
+                    onClick={() => {
+                      const emailInput = document.querySelector('input[placeholder="Your email"]') as HTMLInputElement;
+                      if (emailInput && emailInput.value) {
+                        alert(`Thank you for subscribing with email: ${emailInput.value}`);
+                        emailInput.value = '';
+                      } else {
+                        alert('Please enter your email address.');
+                      }
+                    }}
+                  >
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

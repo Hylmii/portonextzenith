@@ -67,10 +67,26 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <button className="btn-ghost text-sm">
+            <button 
+              className="btn-ghost text-sm"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Let's Talk
             </button>
-            <button className="btn-primary text-sm">
+            <button 
+              className="btn-primary text-sm"
+              onClick={() => {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                  servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Start Project
               <ArrowRight className="w-4 h-4" />
             </button>
@@ -106,10 +122,28 @@ const Header = () => {
               </a>
             ))}
             <div className="flex flex-col space-y-2 px-4 pt-4 border-t border-gray-800">
-              <button className="btn-ghost justify-center">
+              <button 
+                className="btn-ghost justify-center"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
                 Let's Talk
               </button>
-              <button className="btn-primary justify-center">
+              <button 
+                className="btn-primary justify-center"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
                 Start Project
                 <ArrowRight className="w-4 h-4" />
               </button>

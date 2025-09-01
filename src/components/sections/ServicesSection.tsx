@@ -384,7 +384,10 @@ const ServicesSection = () => {
                     >
                       View Details
                     </button>
-                    <button className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300 group-hover:translate-x-1">
+                    <button 
+                      className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300 group-hover:translate-x-1"
+                      onClick={() => setSelectedService(service)}
+                    >
                       <ArrowRight className="w-5 h-5" />
                     </button>
                   </div>
@@ -448,11 +451,27 @@ const ServicesSection = () => {
               Let's discuss your project and explore how we can help you achieve your digital goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-primary">
+              <button 
+                className="btn-primary"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
                 Start Your Project
                 <Zap className="w-4 h-4" />
               </button>
-              <button className="btn-secondary">
+              <button 
+                className="btn-secondary"
+                onClick={() => {
+                  const portfolioSection = document.getElementById('portfolio');
+                  if (portfolioSection) {
+                    portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
                 View Portfolio
                 <ArrowRight className="w-4 h-4" />
               </button>

@@ -340,11 +340,46 @@ const LeadershipModal: React.FC<LeadershipModalProps> = ({ member, isOpen, onClo
 
               {/* CTA Buttons */}
               <div className="space-y-3">
-                <button className="w-full btn-primary justify-center">
+                <button 
+                  className="w-full btn-primary justify-center"
+                  onClick={() => {
+                    const subject = `Meeting Request with ${member.name}`;
+                    const body = `Hello ${member.name},
+
+I would like to schedule a meeting to discuss:
+- Business opportunities
+- Partnership possibilities  
+- Strategic collaboration
+
+Please let me know your availability.
+
+Best regards,`;
+                    
+                    const mailtoLink = `mailto:${member.social.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.open(mailtoLink, '_blank');
+                  }}
+                >
                   <Calendar className="w-4 h-4" />
                   Schedule Meeting
                 </button>
-                <button className="w-full btn-secondary justify-center">
+                <button 
+                  className="w-full btn-secondary justify-center"
+                  onClick={() => {
+                    const subject = `Message for ${member.name}`;
+                    const body = `Hello ${member.name},
+
+I hope this message finds you well. I'm reaching out regarding:
+
+[Please describe your inquiry here]
+
+Looking forward to hearing from you.
+
+Best regards,`;
+                    
+                    const mailtoLink = `mailto:${member.social.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.open(mailtoLink, '_blank');
+                  }}
+                >
                   <MessageCircle className="w-4 h-4" />
                   Send Message
                 </button>

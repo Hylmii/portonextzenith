@@ -305,7 +305,15 @@ const TestimonialsSection = () => {
             <p className="text-gray-400 mb-6">
               Let's create something amazing together and make your project our next success story.
             </p>
-            <button className="btn-primary">
+            <button 
+              className="btn-primary"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Start Your Success Story
               <ArrowRight className="w-4 h-4" />
             </button>
