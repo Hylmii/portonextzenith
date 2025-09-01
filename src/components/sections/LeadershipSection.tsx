@@ -439,7 +439,7 @@ Best regards,`;
           </div>
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section /call to action */}
         <div
           className={`text-center mt-16 transition-all duration-1000 delay-800 ${
             isVisible ? "animate-fade-in opacity-100" : "opacity-0"

@@ -185,7 +185,7 @@ const CompanyMap: React.FC<CompanyMapProps> = ({ location, className = '', varia
                 {mapData.local_results[0].type}
               </span>
             </div>
-          )}
+          )}==
           <div className="flex items-center justify-between pt-2 border-t border-gray-700/50">
             <span className="text-xs text-gray-400">Get Directions</span>
             <div className="flex gap-1">
