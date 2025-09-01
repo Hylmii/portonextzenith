@@ -10,6 +10,23 @@ import {
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleEmailContact = () => {
+    const subject = "General Inquiry - NextZenith Ventures";
+    const body = `Hello NextZenith Team,
+
+I hope this message finds you well. I'm reaching out regarding:
+
+[Please describe your inquiry here]
+
+Looking forward to hearing from you.
+
+Best regards,
+[Your Name]`;
+    
+    const mailtoLink = `mailto:hello@nextzenith.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
+  };
+
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Services', href: '#services' },
@@ -80,10 +97,13 @@ const Footer = () => {
 
               {/* Contact Info */}
               <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-gray-400">
+                <button 
+                  onClick={handleEmailContact}
+                  className="flex items-center gap-3 text-gray-400 hover:text-indigo-400 transition-colors duration-300"
+                >
                   <Mail className="w-4 h-4 text-indigo-400" />
                   <span className="text-sm">hello@nextzenith.com</span>
-                </div>
+                </button>
                 <div className="flex items-center gap-3 text-gray-400">
                   <Phone className="w-4 h-4 text-indigo-400" />
                   <span className="text-sm">+1 (555) 123-4567</span>

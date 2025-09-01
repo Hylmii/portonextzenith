@@ -57,6 +57,35 @@ Looking forward to hearing from you!`;
     window.open(whatsappUrl, '_blank');
   };
 
+  const handleEmailContact = () => {
+    const subject = "Business Inquiry - NextZenith Ventures";
+    const body = `Hello NextZenith Team,
+
+I hope this message finds you well. I'm reaching out regarding:
+
+[Please describe your inquiry here - select one or more:]
+• Web Development Project
+• UI/UX Design Services
+• Cyber Security Consultation
+• Digital Transformation Strategy
+• Other Business Solutions
+
+Project Details:
+• Timeline: [Please specify]
+• Budget Range: [Please specify]
+• Specific Requirements: [Please describe]
+
+Looking forward to hearing from you.
+
+Best regards,
+[Your Name]
+[Your Company]
+[Your Contact Information]`;
+    
+    const mailtoLink = `mailto:hello@nextzenith.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -237,6 +266,22 @@ Looking forward to hearing from you!`;
                   <div
                     key={index}
                     onClick={handleWhatsAppContact}
+                    className="card group flex items-center gap-4 hover:scale-105 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <info.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-white mb-1">{info.title}</h4>
+                      <p className="text-indigo-400 font-medium">{info.value}</p>
+                      <p className="text-sm text-gray-400">{info.description}</p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
+                  </div>
+                ) : info.title === 'Email Us' ? (
+                  <div
+                    key={index}
+                    onClick={handleEmailContact}
                     className="card group flex items-center gap-4 hover:scale-105 transition-all duration-300 cursor-pointer"
                   >
                     <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>

@@ -51,6 +51,23 @@ const LeadershipSection = () => {
     setSelectedMember(null);
   };
 
+  const handleEmailContact = (member: any) => {
+    const subject = `Business Inquiry - NextZenith Ventures`;
+    const body = `Hello ${member.name},
+
+I hope this message finds you well. I'm reaching out regarding:
+
+[Please describe your inquiry here]
+
+Looking forward to hearing from you.
+
+Best regards,
+[Your Name]`;
+    
+    const mailtoLink = `mailto:${member.social.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
+  };
+
   const handleScheduleMeeting = () => {
     // Scroll to contact section
     const contactSection = document.getElementById('contact');
@@ -368,12 +385,12 @@ const LeadershipSection = () => {
                   >
                     <Twitter className="w-4 h-4 text-gray-400" />
                   </a>
-                  <a
-                    href={`mailto:${member.social.email}`}
+                  <button
+                    onClick={() => handleEmailContact(member)}
                     className="w-8 h-8 glass rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors duration-300"
                   >
                     <Mail className="w-4 h-4 text-gray-400" />
-                  </a>
+                  </button>
                 </div>
 
                 {/* View Profile Link */}
