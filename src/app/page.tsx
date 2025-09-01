@@ -2,6 +2,7 @@ import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
+import LeadershipSection from '@/components/sections/LeadershipSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import PortfolioSection from '@/components/sections/PortfolioSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
@@ -20,6 +21,9 @@ export default function Home() {
         
         {/* About Section */}
         <AboutSection />
+        
+        {/* Leadership Section */}
+        <LeadershipSection />
         
         {/* Services Section */}
         <ServicesSection />

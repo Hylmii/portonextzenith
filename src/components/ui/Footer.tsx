@@ -207,7 +207,7 @@ const Footer = () => {
             {/* Tech Stack Badge */}
             <div className="flex items-center gap-2 text-xs text-gray-400">
               <span>Built with Next.js & Tailwind CSS</span>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse-dot"></div>
             </div>
           </div>
         </div>

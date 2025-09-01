@@ -6,8 +6,62 @@
   --primary-dark: #4f46e5;
   --secondary: #8b5cf6;
   --accent: #06b6d4;
-  --success: #10b981;
-  --warning: #f59e0b;
+  --success: #10b981  /* Custom animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Blinking/Pulsing dot animations */
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes breathe {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+  }ing: #f59e0b;
   --error: #ef4444;
   
   /* Grays */
@@ -258,9 +312,52 @@ body {
   animation: slide-in-right 0.6s ease-out forwards;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  /* Blinking/Pulsing dot utility classes */
+  .animate-blink {
+    animation: blink 1s infinite;
+  }
+
+  .animate-pulse-dot {
+    animation: pulse 2s infinite;
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 1.5s infinite;
+  }
+
+  .animate-breathe {
+    animation: breathe 3s infinite;
+  }
+
+  /* Status indicator dots */
+  .status-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .status-online {
+    background-color: #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  .status-busy {
+    background-color: #f87171;
+    animation: blink 1s infinite;
+  }
+
+  .status-away {
+    background-color: #facc15;
+    animation: breathe 3s infinite;
+  }
+
+  .status-offline {
+    background-color: #9ca3af;
+  }
 
 .animate-zoom-in {
   animation: zoom-in 0.6s ease-out forwards;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2, Sparkles, ArrowRight, Zap } from 'lucide-react';
+import { Menu, X, Code2, Sparkles, ArrowRight, Zap, Crown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +19,7 @@ const Header = () => {
   const menuItems = [
     { name: 'Home', href: '#home', icon: Sparkles },
     { name: 'About', href: '#about', icon: Code2 },
+    { name: 'Leadership', href: '#leadership', icon: Crown },
     { name: 'Services', href: '#services', icon: Zap },
     { name: 'Portfolio', href: '#portfolio', icon: Code2 },
     { name: 'Contact', href: '#contact', icon: ArrowRight },
@@ -42,7 +43,10 @@ const Header = () => {
               <h1 className="text-xl font-bold text-white">
                 Nextzenith
               </h1>
-              <p className="text-xs text-gray-400 font-mono">Ventures Mi Room</p>
+              <div className="flex items-center gap-1">
+                <p className="text-xs text-gray-400 font-mono">Ventures Mi Room</p>
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse-dot"></div>
+              </div>
             </div>
           </div>
 

@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev:stable": "next dev",
+    "build": "next build",
+    "build:turbo": "next build --turbopack",
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
     "lucide-react": "^0.542.0",
     "next": "15.5.2",
     "react": "19.1.0",

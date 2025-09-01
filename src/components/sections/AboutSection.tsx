@@ -196,6 +196,16 @@ const AboutSection = () => {
             <p className="text-gray-400 mb-6">
               Let's collaborate to bring your vision to life with cutting-edge technology and exceptional design.
             </p>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse-dot"></div>
+                <span className="text-sm text-gray-400">Available for projects</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-blue-400 rounded-full animate-blink"></div>
+                <span className="text-sm text-gray-400">Fast response</span>
+              </div>
+            </div>
             <button className="btn-primary">
               Get Started Today
               <Zap className="w-4 h-4" />

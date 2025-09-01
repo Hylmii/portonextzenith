@@ -6,6 +6,7 @@ import {
   MessageSquare, User, Building, Calendar,
   CheckCircle, ArrowRight, Zap, Shield
 } from 'lucide-react';
+import CompanyMap from '@/components/ui/CompanyMap';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -59,7 +60,7 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: 'Visit Us',
-      value: 'Jakarta, Indonesia',
+      value: 'Depok, West Java',
       description: 'Come say hello at our office',
       link: '#',
       color: 'from-purple-500 to-pink-500'
@@ -176,23 +177,55 @@ const ContactSection = () => {
 
             {/* Contact Methods */}
             <div className="space-y-6 mb-8">
-              {contactInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.link}
-                  className="card group flex items-center gap-4 hover:scale-105 transition-all duration-300"
-                >
-                  <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <info.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-white mb-1">{info.title}</h4>
-                    <p className="text-indigo-400 font-medium">{info.value}</p>
-                    <p className="text-sm text-gray-400">{info.description}</p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
-                </a>
-              ))}
+              {contactInfo.map((info, index) => {
+                // Special handling for Visit Us section with map
+                if (info.title === 'Visit Us') {
+                  return (
+                    <div key={index} className="space-y-4">
+                      <div className="card group">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center`}>
+                            <info.icon className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-white mb-1">{info.title}</h4>
+                            <p className="text-indigo-400 font-medium">{info.value}</p>
+                            <p className="text-sm text-gray-400">{info.description}</p>
+                          </div>
+                        </div>
+                        
+                        {/* Company Map Integration */}
+                        <div className="mt-4">
+                          <CompanyMap 
+                            location="Depok, West Java, Indonesia"
+                            variant="expanded"
+                            className="w-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+                
+                // Regular contact info items
+                return (
+                  <a
+                    key={index}
+                    href={info.link}
+                    className="card group flex items-center gap-4 hover:scale-105 transition-all duration-300"
+                  >
+                    <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <info.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-white mb-1">{info.title}</h4>
+                      <p className="text-indigo-400 font-medium">{info.value}</p>
+                      <p className="text-sm text-gray-400">{info.description}</p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
+                  </a>
+                );
+              })}
             </div>
 
             {/* Business Hours & Additional Info */}

@@ -25,6 +25,7 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: '512x512',
         type: 'image/png',
       },
+      
     ],
     categories: ['business', 'productivity', 'technology'],
     lang: 'en',
