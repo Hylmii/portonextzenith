@@ -9,38 +9,23 @@ interface CompanyMapProps {
   variant?: 'default' | 'compact' | 'expanded';
 }
 
-interface MapData {
-  local_results: Array<{
-    title: string;
-    gps_coordinates: {
-      latitude: number;
-      longitude: number;
-    };
-    rating: number;
-    reviews: number;
-    type: string;
-    address: string;
-    open_state: string;
-    hours: string;
-    phone: string;
-    website: string;
-  }>;
-}
-
 const CompanyMap: React.FC<CompanyMapProps> = ({ location, className = '', variant = 'default' }) => {
-  const [mapData, setMapData] = useState<MapData | null>(null);
+  const [mapData, setMapData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Depok coordinates
-  const depokCoordinates = { lat: -6.4025, lng: 106.7942 };
+  // Kota Depok coordinates
+  const depokCoordinates = {
+    lat: -6.4025,
+    lng: 106.7942
+  };
 
   useEffect(() => {
     const fetchMapData = async () => {
       try {
         setLoading(true);
         
-        // Simulate API response
+        // Simulate API response with realistic data structure
         setTimeout(() => {
           setMapData({
             local_results: [
@@ -116,7 +101,7 @@ const CompanyMap: React.FC<CompanyMapProps> = ({ location, className = '', varia
     return (
       <div className={`bg-gray-800/30 rounded-lg border border-gray-700/30 p-4 ${className}`}>
         <div className="animate-pulse">
-          <div className={`${getMapHeight()} bg-gray-700/50 rounded-lg mb-3`}></div>
+          <div className="h-32 bg-gray-700/50 rounded-lg mb-3"></div>
           <div className="h-4 bg-gray-700/50 rounded mb-2"></div>
           <div className="h-3 bg-gray-700/50 rounded w-3/4"></div>
         </div>
@@ -201,7 +186,6 @@ const CompanyMap: React.FC<CompanyMapProps> = ({ location, className = '', varia
               </span>
             </div>
           )}
-          
           <div className="flex items-center justify-between pt-2 border-t border-gray-700/50">
             <span className="text-xs text-gray-400">Get Directions</span>
             <div className="flex gap-1">
@@ -222,6 +206,23 @@ const CompanyMap: React.FC<CompanyMapProps> = ({ location, className = '', varia
             </div>
           </div>
         </div>
+        
+        {/* Operating Hours */}
+        {mapData?.local_results?.[0]?.hours && (
+          <div className="mt-3 pt-3 border-t border-gray-700/50">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-xs font-medium text-white">
+                {mapData.local_results[0].hours}
+              </span>
+            </div>
+            {mapData.local_results[0].operating_hours && (
+              <div className="text-xs text-gray-400">
+                Business Hours Available
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

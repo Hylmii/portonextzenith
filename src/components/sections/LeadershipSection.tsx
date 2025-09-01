@@ -68,7 +68,7 @@ const LeadershipSection = () => {
     },
     {
       id: 2,
-      name: 'Name 1', // Will be filled by user
+      name: 'Hafizhul Akmal', // Will be filled by user
       position: 'Direktur Utama',
       shortTitle: 'Director',
       avatar: '👩‍💼',
@@ -91,7 +91,7 @@ const LeadershipSection = () => {
     },
     {
       id: 3,
-      name: 'Name 2', // Will be filled by user
+      name: 'Abdul Raoef Yudha Kurnia', // Will be filled by user
       position: 'Komisaris Utama',
       shortTitle: 'Commissioner',
       avatar: '👨‍💻',
