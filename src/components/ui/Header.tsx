@@ -1,20 +1,59 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2, Sparkles, ArrowRight, Zap, Crown } from 'lucide-react';
+import { Menu, X, Code2, Sparkles, ArrowRight, Zap, Crown, MessageCircle, Mail } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showContactOptions, setShowContactOptions] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.header-contact-dropdown')) {
+        setShowContactOptions(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
+
+  const handleWhatsAppContact = () => {
+    const phoneNumber = "6281234567890"; // Ganti dengan nomor WhatsApp perusahaan Anda
+    const message = `Hello Nextzenith Team! 👋
+
+I'm interested in your services and would like to discuss a potential project.
+
+Could we schedule a consultation to talk about:
+• Project requirements
+• Timeline and budget
+• Available services
+
+Looking forward to hearing from you!`;
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    setShowContactOptions(false);
+  };
+
+  const handleContactForm = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setShowContactOptions(false);
+  };
 
   const menuItems = [
     { name: 'Home', href: '#home', icon: Sparkles },
@@ -67,17 +106,48 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <button 
-              className="btn-ghost text-sm"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              Let's Talk
-            </button>
+            <div className="relative header-contact-dropdown">
+              <button 
+                className="btn-ghost text-sm"
+                onClick={() => setShowContactOptions(!showContactOptions)}
+              >
+                Let's Talk
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${showContactOptions ? 'rotate-90' : ''}`} />
+              </button>
+              
+              {/* Contact Options Dropdown */}
+              {showContactOptions && (
+                <div className="absolute top-full right-0 mt-2 w-56 bg-gray-800/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl z-50 animate-slide-up">
+                  <div className="p-3 space-y-2">
+                    <button
+                      onClick={handleWhatsAppContact}
+                      className="w-full flex items-center gap-3 p-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 rounded-lg transition-all duration-300 group"
+                    >
+                      <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                        <MessageCircle className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="text-white font-medium text-sm">WhatsApp</div>
+                        <div className="text-green-400 text-xs">Quick response</div>
+                      </div>
+                    </button>
+                    
+                    <button
+                      onClick={handleContactForm}
+                      className="w-full flex items-center gap-3 p-2 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 rounded-lg transition-all duration-300 group"
+                    >
+                      <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                        <Mail className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="text-white font-medium text-sm">Contact Form</div>
+                        <div className="text-indigo-400 text-xs">Detailed inquiry</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             <button 
               className="btn-primary text-sm"
               onClick={() => {
@@ -122,17 +192,27 @@ const Header = () => {
               </a>
             ))}
             <div className="flex flex-col space-y-2 px-4 pt-4 border-t border-gray-800">
+              {/* WhatsApp Contact Button */}
               <button 
                 className="btn-ghost justify-center"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
+                  handleWhatsAppContact();
                 }}
               >
-                Let's Talk
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp Chat
+              </button>
+              {/* Contact Form Button */}
+              <button 
+                className="btn-secondary justify-center"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  handleContactForm();
+                }}
+              >
+                <Mail className="w-4 h-4" />
+                Contact Form
               </button>
               <button 
                 className="btn-primary justify-center"

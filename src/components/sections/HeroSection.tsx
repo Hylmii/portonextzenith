@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Code2, Palette, Shield, Zap, Star, Github, Figma, Globe } from 'lucide-react';
+import { ArrowRight, Code2, Palette, Shield, Zap, Star, Github, Figma, Globe, MessageCircle, Mail } from 'lucide-react';
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [showContactOptions, setShowContactOptions] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -14,10 +15,49 @@ const HeroSection = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.contact-dropdown')) {
+        setShowContactOptions(false);
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
+  const handleWhatsAppContact = () => {
+    const phoneNumber = "6281234567890"; // Ganti dengan nomor WhatsApp perusahaan Anda
+    const message = `Hello Nextzenith Team! 👋
+
+I'm interested in your services and would like to discuss a potential project.
+
+Could we schedule a consultation to talk about:
+• Project requirements
+• Timeline and budget
+• Available services
+
+Looking forward to hearing from you!`;
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    setShowContactOptions(false);
+  };
+
+  const handleContactForm = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setShowContactOptions(false);
+  };
+
+  
   const techStack = [
     { icon: Code2, name: 'Development', color: 'from-blue-500 to-cyan-500' },
     { icon: Palette, name: 'UI/UX Design', color: 'from-purple-500 to-pink-500' },
@@ -96,17 +136,52 @@ const HeroSection = () => {
               View Our Work
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button 
-              className="btn-ghost text-lg px-8 py-4"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              Get in Touch
-            </button>
+            
+            {/* Get in Touch with Dropdown */}
+            <div className="relative contact-dropdown">
+              <button 
+                className="btn-ghost text-lg px-8 py-4"
+                onClick={() => setShowContactOptions(!showContactOptions)}
+              >
+                Get in Touch
+                <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${showContactOptions ? 'rotate-90' : ''}`} />
+              </button>
+              
+              {/* Contact Options Dropdown */}
+              {showContactOptions && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-gray-800/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl z-50 animate-slide-up">
+                  <div className="p-4 space-y-3">
+                    <button
+                      onClick={handleWhatsAppContact}
+                      className="w-full flex items-center gap-3 p-3 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 rounded-xl transition-all duration-300 group"
+                    >
+                      <div className="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center">
+                        <MessageCircle className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="text-white font-medium">WhatsApp</div>
+                        <div className="text-green-400 text-sm">Quick response</div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-green-400 group-hover:translate-x-1 transition-transform duration-300" />
+                    </button>
+                    
+                    <button
+                      onClick={handleContactForm}
+                      className="w-full flex items-center gap-3 p-3 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 rounded-xl transition-all duration-300 group"
+                    >
+                      <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
+                        <Mail className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <div className="text-white font-medium">Contact Form</div>
+                        <div className="text-indigo-400 text-sm">Detailed inquiry</div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-1 transition-transform duration-300" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Tech Stack */}

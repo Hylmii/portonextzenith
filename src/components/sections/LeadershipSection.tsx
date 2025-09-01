@@ -52,21 +52,14 @@ const LeadershipSection = () => {
   };
 
   const handleScheduleMeeting = () => {
-    // Create meeting scheduling functionality
-    const subject = "Strategic Partnership Meeting Request";
-    const body = `Hello NextZenith Leadership Team,
-
-I would like to schedule a meeting to discuss:
-- Strategic partnerships
-- Investment opportunities
-- Business collaboration
-
-Please let me know your availability for the next few weeks.
-
-Best regards,`;
-    
-    const mailtoLink = `mailto:ceo@nextzenith.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink, '_blank');
+    // Scroll to contact section
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   const handleViewCareers = () => {
@@ -482,5 +475,7 @@ Best regards,`;
     </section>
   );
 };
+
+
 
 export default LeadershipSection;

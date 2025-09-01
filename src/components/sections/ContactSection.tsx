@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { 
   Mail, Phone, MapPin, Send, Clock, Globe,
   MessageSquare, User, Building, Calendar,
-  CheckCircle, ArrowRight, Zap, Shield
+  CheckCircle, ArrowRight, Zap, Shield, MessageCircle
 } from 'lucide-react';
 import CompanyMap from '@/components/ui/CompanyMap';
 
@@ -40,6 +40,23 @@ const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleWhatsAppContact = () => {
+    const phoneNumber = "6281234567890"; // Ganti dengan nomor WhatsApp perusahaan Anda
+    const message = `Hello Nextzenith Team! 👋
+
+I'm interested in your services and would like to discuss a potential project.
+
+Could we schedule a consultation to talk about:
+• Project requirements
+• Timeline and budget
+• Available services
+
+Looking forward to hearing from you!`;
+    
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -55,6 +72,14 @@ const ContactSection = () => {
       value: '+1 (555) 123-4567',
       description: 'Mon-Fri from 9am to 6pm',
       link: 'tel:+15551234567',
+      color: 'from-green-500 to-emerald-500'
+    },
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp',
+      value: '+62 812-3456-7890',
+      description: 'Quick response via WhatsApp',
+      link: 'whatsapp',
       color: 'from-green-500 to-emerald-500'
     },
     {
@@ -208,7 +233,23 @@ const ContactSection = () => {
                 }
                 
                 // Regular contact info items
-                return (
+                return info.title === 'WhatsApp' ? (
+                  <div
+                    key={index}
+                    onClick={handleWhatsAppContact}
+                    className="card group flex items-center gap-4 hover:scale-105 transition-all duration-300 cursor-pointer"
+                  >
+                    <div className={`w-12 h-12 bg-gradient-to-br ${info.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <info.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-white mb-1">{info.title}</h4>
+                      <p className="text-indigo-400 font-medium">{info.value}</p>
+                      <p className="text-sm text-gray-400">{info.description}</p>
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
+                  </div>
+                ) : (
                   <a
                     key={index}
                     href={info.link}
